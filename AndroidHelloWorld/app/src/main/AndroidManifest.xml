@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.zzrenfeng.jenkin.helloworld">
+
+    <application
+            android:allowBackup="true"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+                android:name=".FirstActivity"
+                android:launchMode="singleTask"
+                android:label="This is FirstActivity">  <!--android:launchMode="singleTop"-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".SecondActivity"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="com.zzrenfeng.jenkin.helloworld.ACTION_START"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="com.zzrenfeng.jenkin.helloworld.MY_CATEGORY"/>
+            </intent-filter>
+        </activity>
+        <activity android:name=".ThirdActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>    <!-- 不加此句代码提示错误：Activity supporting ACTION_VIEW is not set as BROWSABLE -->
+                <data android:scheme="https"/>
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
