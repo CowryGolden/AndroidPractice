@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<litepal>
+    <dbname value="BookStore"></dbname>  <!-- 指定数据库名称 -->
+    <version value="2"></version>  <!-- 指定数据库版本号，当版本号大于当前（value=1）时，代表升级数据库 -->
+
+    <list>
+        <mapping class="com.zzrenfeng.jenkin.litepaltest.Book"></mapping>
+        <mapping class="com.zzrenfeng.jenkin.litepaltest.Category"></mapping>
+    </list>  <!-- 指定所有的映射模型 -->
+</litepal>
