@@ -44,7 +44,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_BOOK);    //数据库初始化创建完成后，同时创建Book表
         db.execSQL(CREATE_TABLE_CATEGORY);
-        Toast.makeText(mContext, "Database created and initialized successfully!", Toast.LENGTH_SHORT).show();
+        //20190729-zjc noted;chapter7：自定义内容提供器，实现跨程序数据共享；由于跨程序访问时不能直接使用Toast，故注释；
+//        Toast.makeText(mContext, "Database created and initialized successfully!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
