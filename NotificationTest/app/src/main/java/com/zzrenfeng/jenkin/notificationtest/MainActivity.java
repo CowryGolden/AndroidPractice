@@ -35,7 +35,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
                 Notification notification = new NotificationCompat.Builder(this)
                         .setContentTitle("This is content title.")
-                        .setContentText("This is content text.")
+//                        .setContentText("Learn how to build notifications, send and sync data, and use voice actions. Get the official Android IDE and developer tools to build apps for Android.")    //长文本不能在通知栏中完整显示，超长部分以"..."显示
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText("Learn how to build notifications, send and sync data, and use voice actions. Get the official Android IDE and developer tools to build apps for Android."))    //上文本完整显示
+                        .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.big_image)))    //在通知栏显示一张大图片
                         .setWhen(System.currentTimeMillis())
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setVibrate(new long[] {0, 1000, 1000, 1000})    //设置有提示时震动（震动1s，静止1s，以此类推）；需要在AndroidManifest.xml中申请震动权限
                         .setLights(Color.GREEN, 1000, 1000)    //设置LED灯闪烁，亮1s暗1s，一闪一闪
 //                        .setDefaults(NotificationCompat.DEFAULT_ALL)    //若不想进行如上3行的繁杂设置，可以使用通知的默认效果，根据当前手机环境来决定播放什么铃声以及如何震动等
+                        .setPriority(NotificationCompat.PRIORITY_MAX)    //设置通知的优先级，这里将将通知的重要程度设置为最高级别，这类通知消息必须要让用户立刻看到，甚至需要用户做出响应操作；
                         .build();
                 manager.notify(1, notification);
                 break;
