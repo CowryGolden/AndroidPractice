@@ -9,9 +9,12 @@ import android.widget.TextView;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.xml.sax.InputSource;
+import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -105,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     showResponse(responseData);    //将返回数据展示在TextView中
-                    parseXMLWithPull(responseData);  //使用XMLPull解析器来解析XML
+//                    parseXMLWithPull(responseData);  //使用XMLPull解析器来解析XML
+                    parseXMLWithSAX(responseData);  //使用SAX解析器来解析XML
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -168,6 +172,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 eventType = xmlPullParser.next();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用SAX解析器来解析XML
+     * @param xmlData
+     */
+    private void parseXMLWithSAX(String xmlData) {
+        try {
+            SAXParserFactory factory = SAXParserFactory.newInstance();
+            XMLReader xmlReader = factory.newSAXParser().getXMLReader();
+            ContentHandler handler = new ContentHandler();
+            //将ContentHandler的实例设置到XMLReader中
+            xmlReader.setContentHandler(handler);
+            //开始执行解析
+            xmlReader.parse(new InputSource(new StringReader(xmlData)));
         } catch (Exception e) {
             e.printStackTrace();
         }
