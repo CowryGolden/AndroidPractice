@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -20,6 +22,7 @@ import javax.xml.parsers.SAXParserFactory;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -113,7 +116,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     showResponse(responseData);    //将返回数据展示在TextView中
 //                    parseXMLWithPull(responseData);  //使用XMLPull解析器来解析XML
 //                    parseXMLWithSAX(responseData);  //使用SAX解析器来解析XML
-                    parseJSONWithJSONObject(responseData);  //使用JSONObject解析器来解析JSON
+//                    parseJSONWithJSONObject(responseData);  //使用JSONObject解析器来解析JSON
+                    parseJSONWithGSON(responseData);  //使用GSON解析器来解析JSON
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -218,6 +222,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用GSON解析器来解析JSON
+     * @param jsonData
+     */
+    private void parseJSONWithGSON(String jsonData) {
+        Gson gson = new Gson();
+        List<App> appList = gson.fromJson(jsonData, new TypeToken<List<App>>(){}.getType());
+        for (App app : appList) {
+            Log.d(TAG, "========[parseJSONWithGSON]>>>> id is: " + app.getId());
+            Log.d(TAG, "========[parseJSONWithGSON]>>>> name is: " + app.getName());
+            Log.d(TAG, "========[parseJSONWithGSON]>>>> version is: " + app.getVersion());
         }
     }
 
