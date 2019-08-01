@@ -9,6 +9,8 @@ import android.widget.TextView;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 import org.xmlpull.v1.XmlPullParser;
@@ -103,13 +105,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
                             //指定访问服务器地址是电脑本机的资源url（查看方法：打开cmd，输入：adb devices 查看模拟设备列表；然后输入：adb -s [emulator-5554] shell 进入指定设备shell界面；再输入：getprop 获取设备信息；其中：[net.gprs.local-ip]: [10.0.2.15] 为本模拟手机IP；[net.eth0.gw]: [10.0.2.2]为电脑本机的IP；）
-                            .url("http://10.0.2.2:8080/get_data.xml")
+//                            .url("http://10.0.2.2:8080/get_data.xml")  //获取xml数据url
+                            .url("http://10.0.2.2:8080/get_data.json")  //获取json数据url
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = response.body().string();
                     showResponse(responseData);    //将返回数据展示在TextView中
 //                    parseXMLWithPull(responseData);  //使用XMLPull解析器来解析XML
-                    parseXMLWithSAX(responseData);  //使用SAX解析器来解析XML
+//                    parseXMLWithSAX(responseData);  //使用SAX解析器来解析XML
+                    parseJSONWithJSONObject(responseData);  //使用JSONObject解析器来解析JSON
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -190,6 +194,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             xmlReader.setContentHandler(handler);
             //开始执行解析
             xmlReader.parse(new InputSource(new StringReader(xmlData)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 使用JSONObject解析器来解析JSON
+     * @param jsonData
+     */
+    private void parseJSONWithJSONObject(String jsonData) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonData);
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String id = jsonObject.getString("id");
+                String name = jsonObject.getString("name");
+                String version = jsonObject.getString("version");
+
+                Log.d(TAG, "========[parseJSONWithJSONObject]>>>> id is: " + id);
+                Log.d(TAG, "========[parseJSONWithJSONObject]>>>> name is: " + name);
+                Log.d(TAG, "========[parseJSONWithJSONObject]>>>> version is: " + version);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
