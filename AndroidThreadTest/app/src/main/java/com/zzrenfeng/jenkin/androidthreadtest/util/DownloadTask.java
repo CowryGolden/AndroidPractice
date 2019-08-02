@@ -11,9 +11,9 @@ import com.zzrenfeng.jenkin.androidthreadtest.MainActivity;
  */
 public class DownloadTask extends AsyncTask<Void, Integer, Boolean> {
 
-    ProgressDialog progressDialog = new ProgressDialog();
-
     Context context;
+
+    ProgressDialog progressDialog = new ProgressDialog(context);
 
     public DownloadTask(Context context) {
         this.context = context;
