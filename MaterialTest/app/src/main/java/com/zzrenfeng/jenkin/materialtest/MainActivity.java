@@ -1,5 +1,8 @@
 package com.zzrenfeng.jenkin.materialtest;
 
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,12 +12,21 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private DrawerLayout mDrawerLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBar actionBar = getSupportActionBar();
+        if(null != actionBar) {
+            actionBar.setDisplayHomeAsUpEnabled(true);  //让导航按钮显示；在Toolbar最左侧的按钮叫作HomeAsUp按钮，它默认的图标是一个返回的箭头，意为返回上一个活动；这里我们对它默认的样式和作用都进行了修改；
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);  //设置导航按钮图标
+        }
     }
 
     /**
@@ -36,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:  //HomeAsUp按钮的id永远是android.R.id.home。
+                mDrawerLayout.openDrawer(GravityCompat.START);  //这里openDrawer()方法中传入的Gravity参数一定要和activity_main.xml中定义的android:layout_gravity属性值一致；
+                break;
             case R.id.backup:
                 Toast.makeText(this, "You clicked the menu of Backup.", Toast.LENGTH_SHORT).show();
                 break;

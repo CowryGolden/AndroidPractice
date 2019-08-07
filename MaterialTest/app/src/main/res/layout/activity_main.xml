@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />  <!-- app:popupTheme该属性是在Android5.0中新增的；使用该属性可以兼容Android5.0以下系统 -->
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />  <!-- app:popupTheme该属性是在Android5.0中新增的；使用该属性可以兼容Android5.0以下系统 -->
+
+    </FrameLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:text="There is operation menu list."
+        android:textSize="30sp"
+        android:background="#FFF" />  <!-- 滑动菜单指定的控件中layout_gravity属性必须指定；因为要告诉DrawerLayout滑动菜单是在屏幕的左边还是右边；left-表示滑动菜单在左边；right-表示滑动菜单在右边。这里指定为start-表示会根据系统语言进行判断；如系统语言是从左往右的（英、汉等），则滑动菜单就在左边；如系统语言是从右往左的（阿拉伯语等），则滑动菜单就在右边。 -->
+
+
+</android.support.v4.widget.DrawerLayout>
