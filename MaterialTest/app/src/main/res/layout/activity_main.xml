@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+    <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">  <!-- CoordinatorLayout为加强版的FrameLayout，可以监听所有子控件的各种事件，然后自动帮助我们做出最为合理的响应。如：弹出的Snackbar提示将悬浮按钮遮挡住了，而如果我们能让CoordinatorLayout监听到Snackbar的弹出事件，那么它会自动将内部的FloatingActionButton向上偏移，从而确保不会被Snackbar遮挡到。 -->
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -28,7 +28,7 @@
             app:elevation="8dp" />  <!-- 其中layout_gravity属性中end的工作原理和如下start的工作原理一样；若系统语言顺序是从左往右的，那么start-表示在左边，end-表示在右边； -->
                                     <!-- 其中elevation属性表示将FloatingActionButton提拔的高度值，值越大，投影范围越大，但投影效果越淡；值越小，投影范围小，投影效果越浓。实际中这些效果的差异其实都不怎么明显，使用默认即可。 -->
 
-    </FrameLayout>
+    </android.support.design.widget.CoordinatorLayout>
 
     <!--<TextView
         android:layout_width="match_parent"
