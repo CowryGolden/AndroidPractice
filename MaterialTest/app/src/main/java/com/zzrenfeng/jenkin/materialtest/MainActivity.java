@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private List<Fruit> fruitList = new ArrayList<>();
 
     private FruitAdapter adapter;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new FruitAdapter(fruitList);
         recyclerView.setAdapter(adapter);
+
+        //实现RecyclerView下拉刷新逻辑
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);  //设置下拉刷新进度条颜色
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {  //设置下拉监听器
+            @Override
+            public void onRefresh() {
+                refreshFruits();  //下拉RecyclerView刷新水果列表
+            }
+        });
 
     }
 
@@ -137,6 +150,30 @@ public class MainActivity extends AppCompatActivity {
             int index = random.nextInt(fruits.length);
             fruitList.add(fruits[index]);
         }
+    }
+
+    /**
+     * 下拉RecyclerView刷新水果列表
+     */
+    private void refreshFruits() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                runOnUiThread(new Runnable() {  //切换回主线程，更新UI
+                    @Override
+                    public void run() {
+                        initFruits();
+                        adapter.notifyDataSetChanged();  //通知数据发生了变化
+                        swipeRefreshLayout.setRefreshing(false);  //false-表示刷新事件结束，并隐藏刷新进度条
+                    }
+                });
+            }
+        }).start();
     }
 
 }

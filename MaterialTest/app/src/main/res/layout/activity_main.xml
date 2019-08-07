@@ -31,12 +31,20 @@
 
         </android.support.design.widget.AppBarLayout>
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />  <!-- 指定布局行为根据RecyclerView的滚动行为影响Toolbar的行为，避免Toolbar被遮挡问题； -->
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <!-- 使用SwipeRefreshLayout实现下拉刷新功能 -->
+            <!-- 指定布局行为根据RecyclerView的滚动行为影响Toolbar的行为，避免Toolbar被遮挡问题； -->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
