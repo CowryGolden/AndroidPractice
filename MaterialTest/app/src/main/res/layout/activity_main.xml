@@ -20,13 +20,20 @@
 
     </FrameLayout>
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:text="There is operation menu list."
         android:textSize="30sp"
-        android:background="#FFF" />  <!-- 滑动菜单指定的控件中layout_gravity属性必须指定；因为要告诉DrawerLayout滑动菜单是在屏幕的左边还是右边；left-表示滑动菜单在左边；right-表示滑动菜单在右边。这里指定为start-表示会根据系统语言进行判断；如系统语言是从左往右的（英、汉等），则滑动菜单就在左边；如系统语言是从右往左的（阿拉伯语等），则滑动菜单就在右边。 -->
+        android:background="#FFF" />-->  <!-- 滑动菜单指定的控件中layout_gravity属性必须指定；因为要告诉DrawerLayout滑动菜单是在屏幕的左边还是右边；left-表示滑动菜单在左边；right-表示滑动菜单在右边。这里指定为start-表示会根据系统语言进行判断；如系统语言是从左往右的（英、汉等），则滑动菜单就在左边；如系统语言是从右往左的（阿拉伯语等），则滑动菜单就在右边。 -->
 
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header" />
 
 </android.support.v4.widget.DrawerLayout>
