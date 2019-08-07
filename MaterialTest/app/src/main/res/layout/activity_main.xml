@@ -18,6 +18,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />  <!-- app:popupTheme该属性是在Android5.0中新增的；使用该属性可以兼容Android5.0以下系统 -->
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_done"
+            app:elevation="8dp" />  <!-- 其中layout_gravity属性中end的工作原理和如下start的工作原理一样；若系统语言顺序是从左往右的，那么start-表示在左边，end-表示在右边； -->
+                                    <!-- 其中elevation属性表示将FloatingActionButton提拔的高度值，值越大，投影范围越大，但投影效果越淡；值越小，投影范围小，投影效果越浓。实际中这些效果的差异其实都不怎么明显，使用默认即可。 -->
+
     </FrameLayout>
 
     <!--<TextView
