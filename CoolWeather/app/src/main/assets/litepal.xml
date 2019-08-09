@@ -8,7 +8,7 @@
     <list>
         <mapping class="com.zzrenfeng.jenkin.coolweather.db.Province" />
         <mapping class="com.zzrenfeng.jenkin.coolweather.db.City" />
-        <mapping class="com.zzrenfeng.jenkin.coolweather.db.Country" />
+        <mapping class="com.zzrenfeng.jenkin.coolweather.db.County" />
     </list>
 
 </litepal>

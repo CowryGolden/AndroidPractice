@@ -27,6 +27,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     // Glide是一个超级强大的图片加载库，不仅可以用于加载本地图片，还可以加载网络图片、GIF图片、甚至是本地视频等；用法简单，一行代码可轻松实现复杂的图片加载功能；
+    implementation 'com.android.support:support-v4:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
