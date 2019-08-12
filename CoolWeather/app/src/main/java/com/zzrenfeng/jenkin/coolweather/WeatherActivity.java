@@ -1,5 +1,6 @@
 package com.zzrenfeng.jenkin.coolweather;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.widget.*;
 import com.bumptech.glide.Glide;
 import com.zzrenfeng.jenkin.coolweather.gson.Forecast;
 import com.zzrenfeng.jenkin.coolweather.gson.Weather;
+import com.zzrenfeng.jenkin.coolweather.service.AutoUpdateService;
 import com.zzrenfeng.jenkin.coolweather.util.HttpUtil;
 import com.zzrenfeng.jenkin.coolweather.util.Utility;
 import okhttp3.Call;
@@ -208,6 +210,9 @@ public class WeatherActivity extends AppCompatActivity {
         sportText.setText(sport);
 
         weatherLayout.setVisibility(View.VISIBLE);
+
+        Intent intent = new Intent(this, AutoUpdateService.class);
+        startService(intent);  //启动（激活）后台自动更新天气服务
     }
 
     /**
