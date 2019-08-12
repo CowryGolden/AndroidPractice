@@ -8,12 +8,33 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //版本名后面添加一句话，意思就是flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        flavorDimensions "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"        
+    }
+    productFlavors {  /* 关于生成多渠道应用商店APK文件的配置，其中的配置项会覆盖defaultConfig中的配置 */
+        qihoo {
+            applicationId "com.zzrenfeng.jenkin.coolweather.qihoo"
+            dimension "1.0"
+        }
+        baidu {
+            applicationId "com.zzrenfeng.jenkin.coolweather.baidu"
+            dimension "1.0"
+        }
+    }
+    signingConfigs {  /* 配置构建签名参数，居然内容参见：gradle.properties，这里直接引用 */
+        config {
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+            keyAlias ALIAS_NAME
+            keyPassword ALIAS_PASS
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config    /* 当生成正式版APK文件时，自动使用配置的签名信息进行签名 */
         }
     }
 }
