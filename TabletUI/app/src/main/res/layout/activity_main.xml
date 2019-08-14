@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">  <!-- CoordinatorLayout为加强版的FrameLayout，可以监听所有子控件的各种事件，然后自动帮助我们做出最为合理的响应。如：弹出的Snackbar提示将悬浮按钮遮挡住了，而如果我们能让CoordinatorLayout监听到Snackbar的弹出事件，那么它会自动将内部的FloatingActionButton向上偏移，从而确保不会被Snackbar遮挡到。 -->
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">  <!-- 使用AppBarLayout解决Toolbar被遮挡的问题 -->
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_scrollFlags="scroll|enterAlways|snap"
+                />  <!-- app:popupTheme该属性是在Android5.0中新增的；使用该属性可以兼容Android5.0以下系统 -->
+                    <!-- RecyclerView在滚动的时候已经将滚动事件通知给AppBarLayout了；在接收到滚动事件后，它内部的子控件可以指定如何去影响这些事件，通过layout_scrollFlags属性就能实现 -->
+                    <!-- scroll-表示当RecyclerView向上滚动的时候，Toolbar会跟着一起向上滚动并实现隐藏； -->
+                    <!-- enterAlways-表示当RecyclerView向下滚动的时候，Toolbar会跟着一起向下滚动并重新显示； -->
+                    <!-- snap-表示当Toolbar还没有完全隐藏或显示的时候，会根据当前滚动的距离自动选择是隐藏还是显示； -->
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <!-- 使用SwipeRefreshLayout实现下拉刷新功能 -->
+            <!-- 指定布局行为根据RecyclerView的滚动行为影响Toolbar的行为，避免Toolbar被遮挡问题； -->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_done"
+            app:elevation="8dp" />  <!-- 其中layout_gravity属性中end的工作原理和如下start的工作原理一样；若系统语言顺序是从左往右的，那么start-表示在左边，end-表示在右边； -->
+        <!-- 其中elevation属性表示将FloatingActionButton提拔的高度值，值越大，投影范围越大，但投影效果越淡；值越小，投影范围小，投影效果越浓。实际中这些效果的差异其实都不怎么明显，使用默认即可。 -->
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:text="There is operation menu list."
+        android:textSize="30sp"
+        android:background="#FFF" />-->  <!-- 滑动菜单指定的控件中layout_gravity属性必须指定；因为要告诉DrawerLayout滑动菜单是在屏幕的左边还是右边；left-表示滑动菜单在左边；right-表示滑动菜单在右边。这里指定为start-表示会根据系统语言进行判断；如系统语言是从左往右的（英、汉等），则滑动菜单就在左边；如系统语言是从右往左的（阿拉伯语等），则滑动菜单就在右边。 -->
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view_left"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu_left"
+        app:headerLayout="@layout/nav_header" />
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view_right"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        app:menu="@menu/nav_menu_right"
+        app:headerLayout="@layout/nav_header" />
+
+</android.support.v4.widget.DrawerLayout>
