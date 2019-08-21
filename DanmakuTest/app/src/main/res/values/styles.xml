@@ -6,6 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <!-- 以下两个属性：让程序在初始化时窗口为透明，初始化后程序主界面才会显示出来，从而解决程序启动时短时间白屏问题 -->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
     </style>
 
 </resources>
