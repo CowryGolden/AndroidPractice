@@ -27,6 +27,10 @@ public class ImageAdapter extends ArrayAdapter<String> {
      * 图片缓存技术的核心类，用于缓存所有下载好的图片，在程序内存达到设定值时会将最少最近使用的图片移除掉
      */
     private LruCache<String, BitmapDrawable> mMemoryCache;
+    /**
+     * 解决异步加载图片乱序问题；解决方案一增加的代码
+     */
+    private ListView mListView;
 
     /**
      * 构造方法
@@ -47,8 +51,22 @@ public class ImageAdapter extends ArrayAdapter<String> {
         };
     }
 
+    /**
+     * 解决异步加载图片乱序问题
+     * 解决方案一：使用findViewWithTag
+     *
+     * @param position
+     * @param convertView
+     * @param parent
+     * @return
+     */
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        //解决异步加载图片乱序问题；解决方案一增加的代码
+        if(null == mListView) {
+            mListView = (ListView) parent;
+        }
+
         String url = getItem(position);
         View view;
         if(null == convertView) {
@@ -57,6 +75,11 @@ public class ImageAdapter extends ArrayAdapter<String> {
             view = convertView;
         }
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
+
+        //解决异步加载图片乱序问题；解决方案一增加的代码
+        imageView.setImageResource(R.drawable.empty_photo);
+        imageView.setTag(url);
+
         BitmapDrawable drawable = getBitmapFromMemoryCache(url);
         if(null != drawable) {
             imageView.setImageDrawable(drawable);
@@ -95,7 +118,10 @@ public class ImageAdapter extends ArrayAdapter<String> {
      * 内部类：异步下载图片的任务
      */
     class BitmapWorkerTask extends AsyncTask<String, Void, BitmapDrawable> {
+
         private ImageView mImageView;
+
+        private String imageUrl;
 
         public BitmapWorkerTask(ImageView imageView) {
             this.mImageView = imageView;
@@ -103,7 +129,7 @@ public class ImageAdapter extends ArrayAdapter<String> {
 
         @Override
         protected BitmapDrawable doInBackground(String... params) {
-            String imageUrl = params[0];
+            imageUrl = params[0];
             //在后台开始下载图片
             Bitmap bitmap = downloadBitmap(imageUrl);
             BitmapDrawable drawable = new BitmapDrawable(getContext().getResources(), bitmap);
@@ -113,8 +139,9 @@ public class ImageAdapter extends ArrayAdapter<String> {
 
         @Override
         protected void onPostExecute(BitmapDrawable drawable) {
-            if(null != mImageView && null != drawable) {
-                mImageView.setImageDrawable(drawable);
+            ImageView imageView = (ImageView) mListView.findViewWithTag(imageUrl);
+            if(null != imageView && null != drawable) {
+                imageView.setImageDrawable(drawable);
             }
         }
 
