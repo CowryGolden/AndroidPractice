@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setStyle(new NotificationCompat.BigTextStyle().bigText("Learn how to build notifications, send and sync data, and use voice actions. Get the official Android IDE and developer tools to build apps for Android."))    //上文本完整显示
                         .setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.big_image)))    //在通知栏显示一张大图片
                         .setWhen(System.currentTimeMillis())
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.mipmap.ic_notice_logo)  // Android从5.0系统开始，对于通知栏图标的设计进行了修改。现在Google要求，所有应用程序的通知栏小图标，应该只使用alpha图层来进行绘制，而不应该包括RGB图层。
                         .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher))
                         .setContentIntent(pi)
                         .setAutoCancel(true)  //方法一：点击查看通知信息后自动取消通知栏图标（方法二参见NotificationActivity的line13-14行）
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         .setLights(Color.GREEN, 1000, 1000)    //设置LED灯闪烁，亮1s暗1s，一闪一闪
 //                        .setDefaults(NotificationCompat.DEFAULT_ALL)    //若不想进行如上3行的繁杂设置，可以使用通知的默认效果，根据当前手机环境来决定播放什么铃声以及如何震动等
                         .setPriority(NotificationCompat.PRIORITY_MAX)    //设置通知的优先级，这里将将通知的重要程度设置为最高级别，这类通知消息必须要让用户立刻看到，甚至需要用户做出响应操作；
+                        .setColor(Color.parseColor("#EAA935"))
                         .build();
                 manager.notify(1, notification);
                 break;
