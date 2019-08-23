@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <!-- 解决ListView异步加载图片（ImageView）乱序的问题；解决方案三：使用NetworkImageView -->
+    <com.android.volley.toolbox.NetworkImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="120dp"
