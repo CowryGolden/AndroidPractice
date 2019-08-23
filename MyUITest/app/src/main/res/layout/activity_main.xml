@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- //随手指移动的萌妹子练习 -->
+<!--
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_framelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/back">
+
+</FrameLayout>
+-->
+
+<!-- //跑动的萌妹子练习 -->
+<!--
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/my_framelayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/back"
+    android:foregroundGravity="center">
+
+</FrameLayout>
+-->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 拖动条 -->
+    <SeekBar android:visibility="gone"
+        android:id="@+id/seekbar_mormal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxHeight="5.0dp"
+        android:minHeight="5.0dp"
+        android:progressDrawable="@drawable/sb_bar"
+        android:thumb="@drawable/sb_thumb" />
+
+    <!-- 星级评分条 -->
+    <RatingBar android:visibility="gone"
+        android:id="@+id/my_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:rating="1.5"
+        android:stepSize="0.5" />
+
+<!--
+    <android.support.v7.widget.AppCompatRatingBar
+        android:id="@+id/my_ac_ratingbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="5"
+        android:rating="0.0"
+        android:stepSize="0.5"/>
+-->
+
+    <!-- 文本时钟 API最低为17 -->
+<!--
+
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="MM/dd/yy h:mmaa"/>
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="MMM dd, yyyy h:mmaa"/>
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="MMMM dd, yyyy h:mmaa"/>
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="E, MMMM dd, yyyy h:mmaa"/>
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="EEEE, MMMM dd, yyyy h:mmaa"/>
+    <TextClock
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:format12Hour="Noteworthy day: 'M/d/yy"/>
+-->
+
+    <!-- 模拟时钟 -->
+    <AnalogClock android:visibility="gone"
+        android:id="@+id/my_analog_clock"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+
+    <!-- 日期选择器 -->
+    <DatePicker android:visibility="gone"
+        android:id="@+id/my_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- 时间选择器 -->
+    <TimePicker android:visibility="gone"
+        android:id="@+id/my_time_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- 日历控件 -->
+    <CalendarView android:visibility="gone"
+        android:id="@+id/my_calendar_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <!-- 使用ViewFlipper实现图片轮播(静态导入) -->
+    <ViewFlipper android:visibility="gone"
+        android:id="@+id/my_static_view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inAnimation="@anim/right_in"
+        android:outAnimation="@anim/right_out"
+        android:flipInterval="3000"> <!-- 自动轮播间隔3s -->
+
+        <include layout="@layout/page_help_one" />
+        <include layout="@layout/page_help_two" />
+        <include layout="@layout/page_help_three" />
+        <include layout="@layout/page_help_four" />
+
+    </ViewFlipper>
+
+    <!-- 支持手势滑动的ViewFlipper(动态导入) -->
+    <ViewFlipper
+        android:id="@+id/my_dynamic_view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+</LinearLayout>
+
+

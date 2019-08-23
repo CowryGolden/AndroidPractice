@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/img_meizi"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp" />
+
+
+    <TextView
+        android:id="@+id/txt_hue"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_below="@id/img_meizi"
+        android:gravity="center"
+        android:text="色调    :"
+        android:textSize="18sp" />
+
+    <SeekBar
+        android:id="@+id/sb_hue"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@id/img_meizi"
+        android:layout_toRightOf="@id/txt_hue" />
+
+
+    <TextView
+        android:id="@+id/txt_saturation"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_below="@id/txt_hue"
+        android:gravity="center"
+        android:text="饱和度:"
+        android:textSize="18sp" />
+
+    <SeekBar
+        android:id="@+id/sb_saturation"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@id/sb_hue"
+        android:layout_toRightOf="@id/txt_saturation" />
+
+
+    <TextView
+        android:id="@+id/txt_lun"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_below="@id/txt_saturation"
+        android:gravity="center"
+        android:text="亮度    :"
+        android:textSize="18sp" />
+
+    <SeekBar
+        android:id="@+id/sb_lum"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@id/sb_saturation"
+        android:layout_toRightOf="@id/txt_lun" />
+
+</RelativeLayout>
